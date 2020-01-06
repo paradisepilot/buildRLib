@@ -36,6 +36,7 @@ bnlearn
 ##### machine learning
 caret
 doParallel
+dtwclust
 e1071
 FNN
 gbm
