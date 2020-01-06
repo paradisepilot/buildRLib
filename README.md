@@ -1,4 +1,4 @@
-# buildRLib
+# buildRLib (2020-01-06)
 
 Use the following Git command to clone the repository (in order to specify that the local user of the cloned repository is to be kennethchu-statcan):
 ```
