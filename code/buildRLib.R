@@ -21,7 +21,11 @@ Sys.time();
 start.proc.time <- proc.time();
 
 ###################################################
-default.libPaths <- setdiff(gsub(x=.libPaths(),pattern="^/Users/.+",replacement=""),c(""));
+default.libPaths <- setdiff(gsub(x=.libPaths(),pattern="^/(Users|home)/.+",replacement=""),c(""));
+
+cat("\n# default.libPaths\n");
+print( default.libPaths   );
+
 .libPaths(default.libPaths);
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
@@ -38,11 +42,28 @@ pkgs.desired <- read.table(
     stringsAsFactors = FALSE
     )[,1];
 
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+# assemble full path for R library to be built
+current.version <- paste0(R.Version()["major"],".",R.Version()["minor"]);
+myLibrary <- file.path(".","library",current.version,"library");
+if(!dir.exists(myLibrary)) { dir.create(path = myLibrary, recursive = TRUE); }
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 # exclude packages already installed
+preinstalled.packages <- as.character(
+    installed.packages(lib.loc = c(.libPaths(),myLibrary))[,"Package"]
+    );
+
+cat("\n# pre-installed packages:\n");
+print(   preinstalled.packages     );
+
 pkgs.desired <- setdiff(
     pkgs.desired,
-    as.character(installed.packages()[,"Package"])
+    preinstalled.packages
     );
+
+cat("\n# packages to be installed:\n");
+print(   pkgs.desired   );
 
 write.table(
     file      = "Rpackages-desired-minus-preinstalled.txt",
@@ -68,19 +89,15 @@ if (nrow(caCRANmirrors) > 0) {
 print(paste("\n##### myRepoURL",myRepoURL,sep=" = "));
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-# assemble full path for R library to be built
-current.version <- paste0(R.Version()["major"],".",R.Version()["minor"]);
-myLibrary <- file.path(".","library",current.version,"library");
-if(!dir.exists(myLibrary)) { dir.create(path = myLibrary, recursive = TRUE); }
-
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 print("\n##### installation of BiocManager starts ...");
-install.packages(
-    pkgs         = c("BiocManager"),
-    lib          = myLibrary,
-    repos        = myRepoURL,
-    dependencies = TRUE # c("Depends", "Imports", "LinkingTo", "Suggests")
-    );
+if ( !("BiocManager" %in% preinstalled.packages) ) {
+    install.packages(
+        pkgs         = c("BiocManager"),
+        lib          = myLibrary,
+        repos        = myRepoURL,
+        dependencies = TRUE # c("Depends", "Imports", "LinkingTo", "Suggests")
+        );
+    }
 print("\n##### installation of BiocManager complete ...");
 
 library(
@@ -91,11 +108,15 @@ library(
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 print("\n##### installation of Bioconductor packages starts ...");
-BiocManager::install(
-    pkgs         = c("BiocVersion","BiocStyle","graph","Rgraphviz","ComplexHeatmap"),
-    lib          = myLibrary,
-    dependencies = TRUE
-    );
+BiocPkgs <- c("BiocVersion","BiocStyle","graph","Rgraphviz","ComplexHeatmap");
+BiocPkgs <- setdiff(BiocPkgs,preinstalled.packages);
+if ( length(BiocPkgs) > 0 ) {
+    BiocManager::install(
+        pkgs         = BiocPkgs,
+        lib          = myLibrary,
+        dependencies = TRUE
+        );
+    }
 print("\n##### installation of Bioconductor packages complete ...");
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
@@ -156,3 +177,4 @@ stop.proc.time - start.proc.time;
 sink(type = "output" );
 sink(type = "message");
 closeAllConnections();
+
