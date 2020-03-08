@@ -13,6 +13,7 @@ profvis
 R6
 
 ##### visualization
+cowplot
 ggplot2
 GGally
 ggvis
