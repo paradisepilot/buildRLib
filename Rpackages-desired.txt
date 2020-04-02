@@ -33,6 +33,7 @@ rpart.plot
 ##### Bayesian
 abc
 bnlearn
+rstan
 
 ##### machine learning
 caret
