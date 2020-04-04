@@ -1,4 +1,5 @@
 ##### general
+arrow
 BiocManager
 digest
 devtools
@@ -14,21 +15,22 @@ R6
 
 ##### visualization
 cowplot
-ggplot2
-GGally
-ggvis
-plotly
-shiny
-ggiraph
-highcharter
-networkD3
-dygraphs
-revealjs
 crosstalk
 d3scatter
-leaflet
+dygraphs
 flexdashboard
+GGally
+ggiraph
+ggplot2
+ggpubr
+ggvis
+highcharter
+leaflet
+networkD3
+plotly
+revealjs
 rpart.plot
+shiny
 
 ##### Bayesian
 abc
