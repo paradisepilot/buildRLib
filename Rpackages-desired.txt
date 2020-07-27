@@ -3,6 +3,7 @@ arrow
 BiocManager
 digest
 devtools
+feather
 futile.logger
 testthat
 tidyverse
