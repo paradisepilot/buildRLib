@@ -4,7 +4,6 @@ BiocManager
 digest
 devtools
 feather
-futile.logger
 testthat
 tidyverse
 tidytext
@@ -13,6 +12,12 @@ tinytex
 data.table
 profvis
 R6
+
+##### logging
+logger
+logging
+futile.logger
+log4r
 
 ##### visualization
 cowplot
