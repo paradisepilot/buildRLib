@@ -3,7 +3,7 @@
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 currentDIR=`pwd`
   codeDIR=${currentDIR}/code
-outputDIR=${currentDIR}/output
+outputDIR=${currentDIR//github/gittmp}/output
 
 if [ ! -d ${outputDIR} ]; then
 	mkdir -p ${outputDIR}
