@@ -4,6 +4,7 @@ BiocManager
 digest
 devtools
 feather
+knitr
 testthat
 tidyverse
 tidytext
