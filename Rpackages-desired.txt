@@ -13,6 +13,7 @@ tinytex
 data.table
 profvis
 R6
+Rd2roxygen
 
 ##### logging
 logger
