@@ -90,6 +90,18 @@ if (nrow(caCRANmirrors) > 0) {
 print(paste("\n##### myRepoURL",myRepoURL,sep=" = "));
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+# install package 'tiff' to user-specified library
+print("\n##### installation of package 'tiff' ...");
+install.packages(
+    pkgs         = "tiff",
+    lib          = myLibrary,
+    repos        = myRepoURL,
+    type         = "binary",
+    dependencies = TRUE # c("Depends", "Imports", "LinkingTo", "Suggests")
+    );
+print("\n##### installation of package 'tiff' complete ...");
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 print("\n##### installation of BiocManager starts ...");
 if ( !("BiocManager" %in% preinstalled.packages) ) {
     install.packages(
@@ -121,8 +133,7 @@ if ( length(BiocPkgs) > 0 ) {
 print("\n##### installation of Bioconductor packages complete ...");
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-# install desired R packages to
-# user-specified library
+# install desired R packages to user-specified library
 print("\n##### installation of packages starts ...");
 install.packages(
     pkgs         = pkgs.desired,
