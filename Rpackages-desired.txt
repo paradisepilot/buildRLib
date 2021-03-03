@@ -104,3 +104,32 @@ refund
 ##### misc.
 EnvStats
 
+##### Markov random field
+mrf2d
+RandomFields
+
+##### spatial
+cancensus
+cshapes
+fieldRS
+gdalcubes
+gdalUtils
+gdistance
+geosphere
+ggmap
+ggspatial
+gstat
+qualmap
+rcosmo
+rgdal
+raster
+rasterVis
+rgee
+sf
+sp
+spacetime
+spatstat
+spsurvey
+stars
+terra
+
