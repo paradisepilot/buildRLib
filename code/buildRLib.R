@@ -90,16 +90,32 @@ if (nrow(caCRANmirrors) > 0) {
 print(paste("\n##### myRepoURL",myRepoURL,sep=" = "));
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+is.macOS <- grepl(x = sessionInfo()[['platform']], pattern = 'apple', ignore.case = TRUE);
+myType   <- ifelse(test = is.macOS, yes = "binary", no = getOption("pkgType"));
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 # install package 'tiff' to user-specified library
 print("\n##### installation of package 'tiff' ...");
 install.packages(
     pkgs         = "tiff",
     lib          = myLibrary,
     repos        = myRepoURL,
-    type         = "binary",
+    type         = myType,
     dependencies = TRUE # c("Depends", "Imports", "LinkingTo", "Suggests")
     );
 print("\n##### installation of package 'tiff' complete ...");
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+# install package 'tiff' to user-specified library
+print("\n##### installation of package 'Cairo' ...");
+install.packages(
+    pkgs         = "Cairo",
+    lib          = myLibrary,
+    repos        = myRepoURL,
+    type         = myType,
+    dependencies = TRUE # c("Depends", "Imports", "LinkingTo", "Suggests")
+    );
+print("\n##### installation of package 'Cairo' complete ...");
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 print("\n##### installation of BiocManager starts ...");
