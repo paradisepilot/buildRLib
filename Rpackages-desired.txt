@@ -22,6 +22,7 @@ futile.logger
 log4r
 
 ##### visualization
+Cairo
 cowplot
 crosstalk
 d3scatter
