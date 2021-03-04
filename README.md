@@ -5,7 +5,7 @@ For details on how to manage multiple Git accounts on a single computer, see:
 https://www.freecodecamp.org/news/manage-multiple-github-accounts-the-ssh-way-2dadc30ccaca/
 ```
 
-If the following error regarding the R package is encountered on a macOS computer:
+If an error regarding the R package **Cairo** similar to the following is encountered on a macOS computer:
 ```
 Error : .onLoad failed in loadNamespace() for 'Cairo', details:
   call: dyn.load(file, DLLpath = DLLpath, ...)
@@ -16,7 +16,7 @@ Error : .onLoad failed in loadNamespace() for 'Cairo', details:
 Error: package or namespace load failed for ‘Cairo’
 ```
 consider installing X11 for Mac, which is called XQuartz.
-It no longer ships with OS X.
+XQuartz no longer ships with OS X.
 
 To install X11/XQuartz, visit: **https://www.xquartz.org/**
 
