@@ -17,8 +17,9 @@ Error: package or namespace load failed for ‘Cairo’
 ```
 consider installing X11 for Mac, which is called XQuartz.
 It no longer ships with OS X.
-To install X11/XQuartz, visit: **https://www.xquartz.org/**
 For more information, see the following blog post:
 
-https://izziswift.com/include-cairo-r-on-a-mac/
+**https://izziswift.com/include-cairo-r-on-a-mac/**
+
+To install X11/XQuartz, visit: **https://www.xquartz.org/**
 
