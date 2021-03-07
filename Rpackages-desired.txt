@@ -57,6 +57,7 @@ gbm
 glmnet
 kernlab
 packrat
+pROC
 randomForest
 ranger
 tree
