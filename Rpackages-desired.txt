@@ -120,6 +120,7 @@ gdistance
 geosphere
 ggmap
 ggspatial
+GISTools
 gstat
 qualmap
 rcosmo
