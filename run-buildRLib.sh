@@ -19,7 +19,8 @@ cp ${rpackagesFILE} ${outputDIR}
 ##################################################
 myRscript=${codeDIR}/buildRLib.R
 stdoutFile=${outputDIR}/stdout.R.`basename ${myRscript} .R`
-R --no-save --args ${codeDIR} ${outputDIR} ${rpackagesFILE} < ${myRscript} 2>&1 > ${stdoutFile}
+stderrFile=${outputDIR}/stderr.R.`basename ${myRscript} .R`
+R --no-save --args ${codeDIR} ${outputDIR} ${rpackagesFILE} < ${myRscript} > ${stdoutFile} 2> ${stderrFile}
 
 ##################################################
 exit
