@@ -160,6 +160,19 @@ install.packages(
 print("\n##### installation of packages complete ...");
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+# install spDataLarge on macOS
+is.macOS <- grepl(x = sessionInfo()[['platform']], pattern = 'apple', ignore.case = TRUE);
+if ( is.macOS ) {
+    print("\n##### installing spDataLarge ...");
+    install.packages(
+        pkgs  = 'spDataLarge',
+        repos = 'https://nowosad.github.io/drat/',
+        type  = 'source'
+        );
+    print("\n##### installation of spDataLarge complete ...");
+    }
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 my.colnames <- c("Package","Version","License","License_restricts_use","NeedsCompilation","Built");
 DF.installed.packages <- as.data.frame(installed.packages(lib = myLibrary)[,my.colnames]);
 
