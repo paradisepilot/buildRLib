@@ -85,6 +85,14 @@ if (nrow(caCRANmirrors) > 0) {
 print(paste("\n##### myRepoURL",myRepoURL,sep=" = "));
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+# set timeout to 300 seconds;
+# needed for downloading large package source when using download.file(),
+# which in turn is used by install.packages.
+options( timeout = 300 );
+cat("\n# getOption('timeout')\n");
+print(   getOption('timeout')   );
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 is.macOS <- grepl(x = sessionInfo()[['platform']], pattern = 'apple', ignore.case = TRUE);
 myType   <- ifelse(test = is.macOS, yes = "binary", no = getOption("pkgType"));
 
