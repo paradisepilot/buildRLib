@@ -188,14 +188,15 @@ if ( is.macOS ) {
     cat("\n##### installation begins: 'spDataLarge' ...\n");
     install.packages(
         pkgs  = 'spDataLarge',
+        lib   = myLibrary,
         repos = 'https://nowosad.github.io/drat/',
         type  = 'source'
         );
     cat("\n##### installation complete: 'spDataLarge' ...\n");
 
     cat("\n##### installation begins: 'getSpatialData' ...\n");
-    .libPaths(c(.libPaths(),myLibrary));
-    devtools::install_github("16EAGLE/getSpatialData");
+    .libPaths(c(myLibrary,.libPaths()));
+    devtools::install_github(repo = "16EAGLE/getSpatialData", upgrade = "always");
     cat("\n##### installation complete: 'getSpatialData' ...\n");
 
     }
