@@ -85,10 +85,10 @@ if (nrow(caCRANmirrors) > 0) {
 print(paste("\n##### myRepoURL",myRepoURL,sep=" = "));
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-# set timeout to 300 seconds;
+# set timeout to 600 seconds;
 # needed for downloading large package source when using download.file(),
 # which in turn is used by install.packages.
-options( timeout = 300 );
+options( timeout = 600 );
 cat("\n# getOption('timeout')\n");
 print(   getOption('timeout')   );
 
