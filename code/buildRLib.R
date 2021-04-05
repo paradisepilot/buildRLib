@@ -185,7 +185,7 @@ cat("\n##### installation complete: not-yet-installed packages in Rpackages-desi
 is.macOS <- grepl(x = sessionInfo()[['platform']], pattern = 'apple', ignore.case = TRUE);
 if ( is.macOS ) {
 
-    cat("\n##### installing begins: 'spDataLarge' ...\n");
+    cat("\n##### installation begins: 'spDataLarge' ...\n");
     install.packages(
         pkgs  = 'spDataLarge',
         repos = 'https://nowosad.github.io/drat/',
@@ -193,7 +193,7 @@ if ( is.macOS ) {
         );
     cat("\n##### installation complete: 'spDataLarge' ...\n");
 
-    cat("\n##### installing begins: 'getSpatialData' ...\n");
+    cat("\n##### installation begins: 'getSpatialData' ...\n");
     .libPaths(c(.libPaths(),myLibrary));
     devtools::install_github("16EAGLE/getSpatialData");
     cat("\n##### installation complete: 'getSpatialData' ...\n");
