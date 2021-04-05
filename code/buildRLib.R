@@ -25,7 +25,7 @@ start.proc.time <- proc.time();
   default.libPaths <- setdiff(gsub(x=.libPaths(),pattern="^/(Users|home)/.+/buildRLib/.+",replacement=""),c(""));
 
 cat("\n# default.libPaths\n");
-print( default.libPaths   );
+print(   default.libPaths   );
 
 .libPaths(default.libPaths);
 
