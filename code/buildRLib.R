@@ -95,7 +95,7 @@ myType   <- ifelse(test = is.macOS, yes = "binary", no = getOption("pkgType"));
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 # install package 'tiff' to user-specified library
-print("\n##### installation of package 'tiff' ...");
+cat("\n##### installation begins: 'tiff' ...\n");
 install.packages(
     pkgs         = "tiff",
     lib          = myLibrary,
@@ -103,11 +103,11 @@ install.packages(
     type         = myType,
     dependencies = TRUE # c("Depends", "Imports", "LinkingTo", "Suggests")
     );
-print("\n##### installation of package 'tiff' complete ...");
+cat("\n##### installation complete: 'tiff' ...\n");
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 # install package 'tiff' to user-specified library
-print("\n##### installation of package 'Cairo' ...");
+cat("\n##### installation begins: 'Cairo' ...\n");
 install.packages(
     pkgs         = "Cairo",
     lib          = myLibrary,
@@ -115,10 +115,10 @@ install.packages(
     type         = myType,
     dependencies = TRUE # c("Depends", "Imports", "LinkingTo", "Suggests")
     );
-print("\n##### installation of package 'Cairo' complete ...");
+cat("\n##### installation complete: 'Cairo' ...\n");
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-print("\n##### installation of BiocManager starts ...");
+cat("\n##### installation begins: 'BiocManager' ...\n");
 if ( !("BiocManager" %in% preinstalled.packages) ) {
     install.packages(
         pkgs         = c("BiocManager"),
@@ -127,7 +127,7 @@ if ( !("BiocManager" %in% preinstalled.packages) ) {
         dependencies = TRUE # c("Depends", "Imports", "LinkingTo", "Suggests")
         );
     }
-print("\n##### installation of BiocManager complete ...");
+cat("\n##### installation complete: 'BiocManager' ...\n");
 
 library(
     package        = "BiocManager",
@@ -136,7 +136,7 @@ library(
     );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-print("\n##### installation of Bioconductor packages starts ...");
+cat("\n##### installation begins: 'Bioconductor' packages ...\n");
 BiocPkgs <- c("BiocVersion","BiocStyle","graph","Rgraphviz","ComplexHeatmap");
 BiocPkgs <- setdiff(BiocPkgs,preinstalled.packages);
 if ( length(BiocPkgs) > 0 ) {
@@ -146,30 +146,36 @@ if ( length(BiocPkgs) > 0 ) {
         dependencies = TRUE
         );
     }
-print("\n##### installation of Bioconductor packages complete ...");
+cat("\n##### installation complete: 'Bioconductor' packages ...\n");
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 # install desired R packages to user-specified library
-print("\n##### installation of packages starts ...");
+cat("\n##### installation begins: not-yet-installed packages in Rpackages-desired.txt ...\n");
 install.packages(
     pkgs         = pkgs.desired,
     lib          = myLibrary,
     repos        = myRepoURL,
     dependencies = TRUE # c("Depends", "Imports", "LinkingTo", "Suggests")
     );
-print("\n##### installation of packages complete ...");
+cat("\n##### installation complete: not-yet-installed packages in Rpackages-desired.txt ...\n");
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-# install spDataLarge on macOS
+# On macOS, install also: spDataLarge, getSpatialData
 is.macOS <- grepl(x = sessionInfo()[['platform']], pattern = 'apple', ignore.case = TRUE);
 if ( is.macOS ) {
-    print("\n##### installing spDataLarge ...");
+
+    cat("\n##### installing begins: 'spDataLarge' ...\n");
     install.packages(
         pkgs  = 'spDataLarge',
         repos = 'https://nowosad.github.io/drat/',
         type  = 'source'
         );
-    print("\n##### installation of spDataLarge complete ...");
+    cat("\n##### installation complete: 'spDataLarge' ...\n");
+
+    cat("\n##### installing begins: 'getSpatialData' ...\n");
+    devtools::install_github("16EAGLE/getSpatialData");
+    cat("\n##### installation complete: 'getSpatialData' ...\n");
+
     }
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
@@ -201,21 +207,20 @@ write.table(
 
 ###################################################
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-print("\n##### warnings()")
-warnings();
+cat("\n##### warnings()\n");
+print( warnings() );
 
-print("\n##### sessionInfo()")
-sessionInfo();
+cat("\n##### sessionInfo()\n");
+print( sessionInfo() );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-print("\n##### Sys.time()");
-Sys.time();
+cat("\n##### Sys.time()\n");
+print( Sys.time() );
 
 stop.proc.time <- proc.time();
-print("\n##### start.proc.time() - stop.proc.time()");
+cat("\n##### start.proc.time() - stop.proc.time()\n");
 stop.proc.time - start.proc.time;
 
 sink(type = "output" );
 sink(type = "message");
 closeAllConnections();
-
