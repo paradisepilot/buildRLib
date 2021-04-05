@@ -194,6 +194,7 @@ if ( is.macOS ) {
     cat("\n##### installation complete: 'spDataLarge' ...\n");
 
     cat("\n##### installing begins: 'getSpatialData' ...\n");
+    library(package = "devtools", character.only = TRUE, lib.loc = myLibrary);
     devtools::install_github("16EAGLE/getSpatialData");
     cat("\n##### installation complete: 'getSpatialData' ...\n");
 
