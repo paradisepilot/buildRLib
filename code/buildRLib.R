@@ -54,15 +54,10 @@ if(!dir.exists(myLibrary)) { dir.create(path = myLibrary, recursive = TRUE); }
 preinstalled.packages <- as.character(
     installed.packages(lib.loc = c(.libPaths(),myLibrary))[,"Package"]
     );
-
 cat("\n# pre-installed packages:\n");
 print(   preinstalled.packages     );
 
-pkgs.desired <- setdiff(
-    pkgs.desired,
-    preinstalled.packages
-    );
-
+pkgs.desired <- setdiff(pkgs.desired,preinstalled.packages);
 cat("\n# packages to be installed:\n");
 print(   pkgs.desired   );
 
@@ -119,7 +114,10 @@ cat("\n##### installation complete: 'Cairo' ...\n");
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 cat("\n##### installation begins: 'BiocManager' ...\n");
-if ( !("BiocManager" %in% preinstalled.packages) ) {
+already.installed.packages <- as.character(
+    installed.packages(lib.loc = c(.libPaths(),myLibrary))[,"Package"]
+    );
+if ( !("BiocManager" %in% already.installed.packages) ) {
     install.packages(
         pkgs         = c("BiocManager"),
         lib          = myLibrary,
@@ -138,7 +136,10 @@ library(
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 cat("\n##### installation begins: 'Bioconductor' packages ...\n");
 BiocPkgs <- c("BiocVersion","BiocStyle","graph","Rgraphviz","ComplexHeatmap");
-BiocPkgs <- setdiff(BiocPkgs,preinstalled.packages);
+already.installed.packages <- as.character(
+    installed.packages(lib.loc = c(.libPaths(),myLibrary))[,"Package"]
+    );
+BiocPkgs <- setdiff(BiocPkgs,already.installed.packages);
 if ( length(BiocPkgs) > 0 ) {
     BiocManager::install(
         pkgs         = BiocPkgs,
@@ -149,14 +150,26 @@ if ( length(BiocPkgs) > 0 ) {
 cat("\n##### installation complete: 'Bioconductor' packages ...\n");
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-# install desired R packages to user-specified library
 cat("\n##### installation begins: not-yet-installed packages in Rpackages-desired.txt ...\n");
+
+# exclude packages already installed
+already.installed.packages <- as.character(
+    installed.packages(lib.loc = c(.libPaths(),myLibrary))[,"Package"]
+    );
+cat("\n# already-installed packages:\n");
+print(   already.installed.packages     );
+
+pkgs.desired <- setdiff(pkgs.desired,already.installed.packages);
+cat("\n# packages to be installed:\n");
+print(   pkgs.desired   );
+
 install.packages(
     pkgs         = pkgs.desired,
     lib          = myLibrary,
     repos        = myRepoURL,
     dependencies = TRUE # c("Depends", "Imports", "LinkingTo", "Suggests")
     );
+
 cat("\n##### installation complete: not-yet-installed packages in Rpackages-desired.txt ...\n");
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
