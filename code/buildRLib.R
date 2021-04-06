@@ -72,22 +72,18 @@ write.table(
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 # get URL of an active CRAN mirror
 CRANmirrors <- getCRANmirrors();
-CRANmirrors <- CRANmirrors[CRANmirrors[,"OK"]==1,];
+CRANmirrors <- CRANmirrors[CRANmirrors[,"OK"]      == 1,                          ];
+CRANmirrors <- CRANmirrors[CRANmirrors[,'Comment'] == 'secure_mirror_from_master',];
 
-caCRANmirrors <- CRANmirrors[CRANmirrors[,"CountryCode"]=="ca",c("Name","CountryCode","OK","URL")];
-usCRANmirrors <- CRANmirrors[CRANmirrors[,"CountryCode"]=="us",c("Name","CountryCode","OK","URL")];
-
-if (nrow(usCRANmirrors) > 0) {
-	myRepoURL <- usCRANmirrors[1,"URL"];
-	} else if (nrow(caCRANmirrors) > 0) {
-	myRepoURL <- caCRANmirrors[1,"URL"];
-	} else if (nrow(CRANmirrors) > 0) {
+if ( nrow(CRANmirrors) > 0 ) {
 	myRepoURL <- CRANmirrors[1,"URL"];
 	} else {
-	quit(save="no");
+  cat("\n##### ERROR: Found no CRAN mirrors with 'OK' = 1 and 'Comment' == 'secure_mirror_from_master'\n");
+  cat("\n##### ABORTED.\n");
+	quit(save = "no");
 	}
 
-print(paste("\n##### myRepoURL",myRepoURL,sep=" = "));
+cat(paste("\n##### myRepoURL",myRepoURL,sep=" = "));
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 # set timeout to 600 seconds;
@@ -192,6 +188,7 @@ already.installed.packages <- as.character(
 pkgs.still.to.install <- setdiff(desired,already.installed.packages);
 
 if ( length(pkgs.still.to.install) > 0 ) {
+
     cat("\n##### second-round installation begins: not-yet-installed packages in Rpackages-desired.txt ...\n");
 
     cat("\n# already-installed packages:\n");
@@ -200,17 +197,25 @@ if ( length(pkgs.still.to.install) > 0 ) {
     cat("\n# packages to be installed:\n");
     print(   pkgs.still.to.install   );
 
-    myRepoURL <- CRANmirrors[1,"URL"];
-    print(paste("\n##### myRepoURL",myRepoURL,sep=" = "));
+    if ( nrow(CRANmirrors) == 1 ) {
+        cat("\n# Found no additional CRAN mirrors with 'OK' = 1 and 'Comment' == 'secure_mirror_from_master'\n");
+        } else {
 
-    install.packages(
-        pkgs         = pkgs.still.to.install,
-        lib          = myLibrary,
-        repos        = myRepoURL,
-        dependencies = TRUE # c("Depends", "Imports", "LinkingTo", "Suggests")
-        );
+        random.row.index <- sample(x = seq(2,nrow(CRANmirrors)), size = 1);
+        myRepoURL <- CRANmirrors[random.row.index,"URL"];
+        print(paste("\n# myRepoURL",myRepoURL,sep=" = "));
+
+        install.packages(
+            pkgs         = pkgs.still.to.install,
+            lib          = myLibrary,
+            repos        = myRepoURL,
+            dependencies = TRUE # c("Depends", "Imports", "LinkingTo", "Suggests")
+            );
+
+        }
 
     cat("\n##### second-round installation complete: not-yet-installed packages in Rpackages-desired.txt ...\n");
+
     }
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
