@@ -25,7 +25,7 @@ log4r
 # Cairo
 cowplot
 crosstalk
-d3scatter
+scatterD3
 dygraphs
 flexdashboard
 GGally
