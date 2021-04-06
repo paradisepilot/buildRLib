@@ -194,10 +194,13 @@ if ( is.macOS ) {
         );
     cat("\n##### installation complete: 'spDataLarge' ...\n");
 
-    cat("\n##### installation begins: 'getSpatialData' ...\n");
     .libPaths(c(myLibrary,.libPaths()));
-    devtools::install_github(repo = "16EAGLE/getSpatialData", upgrade = "always");
-    cat("\n##### installation complete: 'getSpatialData' ...\n");
+    github.repos <- c("r-spatial/RQGIS3","16EAGLE/getSpatialData");
+    for ( github.repo in github.repos ) {
+        cat(paste0("\n##### installation begins: '",github.repo,"' ...\n"));
+        devtools::install_github(repo = github.repo, upgrade = "always");
+        cat(paste0("\n##### installation complete: '",github.repo,"' ...\n"));
+        }
 
     }
 
