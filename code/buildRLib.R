@@ -185,7 +185,7 @@ cat("\n##### first-round installation complete: not-yet-installed packages in Rp
 already.installed.packages <- as.character(
     installed.packages(lib.loc = c(.libPaths(),myLibrary))[,"Package"]
     );
-pkgs.still.to.install <- setdiff(desired,already.installed.packages);
+pkgs.still.to.install <- setdiff(pkgs.desired,already.installed.packages);
 
 if ( length(pkgs.still.to.install) > 0 ) {
 
