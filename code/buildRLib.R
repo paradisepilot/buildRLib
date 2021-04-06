@@ -71,15 +71,20 @@ write.table(
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 # get URL of an active CRAN mirror
-CRANmirrors   <- getCRANmirrors();
-CRANmirrors   <- CRANmirrors[CRANmirrors[,"OK"]==1,];
+CRANmirrors <- getCRANmirrors();
+CRANmirrors <- CRANmirrors[CRANmirrors[,"OK"]==1,];
+
 caCRANmirrors <- CRANmirrors[CRANmirrors[,"CountryCode"]=="ca",c("Name","CountryCode","OK","URL")];
-if (nrow(caCRANmirrors) > 0) {
-	myRepoURL <- caCRANmirrors[nrow(caCRANmirrors),"URL"];
+usCRANmirrors <- CRANmirrors[CRANmirrors[,"CountryCode"]=="us",c("Name","CountryCode","OK","URL")];
+
+if (nrow(usCRANmirrors) > 0) {
+	myRepoURL <- usCRANmirrors[1,"URL"];
+	} else if (nrow(caCRANmirrors) > 0) {
+	myRepoURL <- caCRANmirrors[1,"URL"];
 	} else if (nrow(CRANmirrors) > 0) {
 	myRepoURL <- CRANmirrors[1,"URL"];
 	} else {
-	q();
+	quit(save="no");
 	}
 
 print(paste("\n##### myRepoURL",myRepoURL,sep=" = "));
@@ -158,7 +163,7 @@ if ( length(BiocPkgs) > 0 ) {
 cat("\n##### installation complete: 'Bioconductor' packages ...\n");
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-cat("\n##### installation begins: not-yet-installed packages in Rpackages-desired.txt ...\n");
+cat("\n##### first-round installation begins: not-yet-installed packages in Rpackages-desired.txt ...\n");
 
 # exclude packages already installed
 already.installed.packages <- as.character(
@@ -167,18 +172,46 @@ already.installed.packages <- as.character(
 cat("\n# already-installed packages:\n");
 print(   already.installed.packages     );
 
-pkgs.desired <- setdiff(pkgs.desired,already.installed.packages);
+pkgs.still.to.install <- setdiff(pkgs.desired,already.installed.packages);
 cat("\n# packages to be installed:\n");
-print(   pkgs.desired   );
+print(   pkgs.still.to.install   );
 
 install.packages(
-    pkgs         = pkgs.desired,
+    pkgs         = pkgs.still.to.install,
     lib          = myLibrary,
     repos        = myRepoURL,
     dependencies = TRUE # c("Depends", "Imports", "LinkingTo", "Suggests")
     );
 
-cat("\n##### installation complete: not-yet-installed packages in Rpackages-desired.txt ...\n");
+cat("\n##### first-round installation complete: not-yet-installed packages in Rpackages-desired.txt ...\n");
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+already.installed.packages <- as.character(
+    installed.packages(lib.loc = c(.libPaths(),myLibrary))[,"Package"]
+    );
+pkgs.still.to.install <- setdiff(desired,already.installed.packages);
+
+if ( length(pkgs.still.to.install) > 0 ) {
+    cat("\n##### second-round installation begins: not-yet-installed packages in Rpackages-desired.txt ...\n");
+
+    cat("\n# already-installed packages:\n");
+    print(   already.installed.packages     );
+
+    cat("\n# packages to be installed:\n");
+    print(   pkgs.still.to.install   );
+
+    myRepoURL <- CRANmirrors[1,"URL"];
+    print(paste("\n##### myRepoURL",myRepoURL,sep=" = "));
+
+    install.packages(
+        pkgs         = pkgs.still.to.install,
+        lib          = myLibrary,
+        repos        = myRepoURL,
+        dependencies = TRUE # c("Depends", "Imports", "LinkingTo", "Suggests")
+        );
+
+    cat("\n##### second-round installation complete: not-yet-installed packages in Rpackages-desired.txt ...\n");
+    }
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 # On macOS, install also: spDataLarge, getSpatialData
