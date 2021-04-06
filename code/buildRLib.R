@@ -21,8 +21,10 @@ Sys.time();
 start.proc.time <- proc.time();
 
 ###################################################
-# default.libPaths <- setdiff(gsub(x=.libPaths(),pattern="^/(Users|home)/.+/buildRLib/.+",replacement=""),c(""));
-  default.libPaths <- setdiff(gsub(x=.libPaths(),pattern="^/(Users|home)/.+",replacement=""),c(""));
+default.libPaths <- .libPaths();
+default.libPaths <- gsub(x = default.libPaths, pattern = "^/(Users|home)/.+/Library/R/.+/library", replacement = "");
+default.libPaths <- gsub(x = default.libPaths, pattern = "^/(Users|home)/.+/buildRLib/.+",         replacement = "");
+default.libPaths <- setdiff(default.libPaths,c(""));
 
 cat("\n# default.libPaths\n");
 print(   default.libPaths   );
