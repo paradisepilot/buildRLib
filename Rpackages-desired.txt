@@ -56,7 +56,7 @@ FNN
 gbm
 glmnet
 kernlab
-mlr3
+mlr3verse
 packrat
 pROC
 randomForest
