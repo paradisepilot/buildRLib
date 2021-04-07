@@ -100,48 +100,27 @@ is.macOS <- grepl(x = sessionInfo()[['platform']], pattern = 'apple', ignore.cas
 myType   <- ifelse(test = is.macOS, yes = "binary", no = getOption("pkgType"));
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-# install package 'tiff' to user-specified library
-cat("\n##### installation begins: 'tiff' ...\n");
-install.packages(
-    pkgs         = "tiff",
-    lib          = myLibrary,
-    repos        = myRepoURL,
-    type         = myType,
-    dependencies = TRUE # c("Depends", "Imports", "LinkingTo", "Suggests")
-    );
-cat("\n##### installation complete: 'tiff' ...\n");
-
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-# install package 'tiff' to user-specified library
-cat("\n##### installation begins: 'Cairo' ...\n");
-install.packages(
-    pkgs         = "Cairo",
-    lib          = myLibrary,
-    repos        = myRepoURL,
-    type         = myType,
-    dependencies = TRUE # c("Depends", "Imports", "LinkingTo", "Suggests")
-    );
-cat("\n##### installation complete: 'Cairo' ...\n");
-
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-cat("\n##### installation begins: 'BiocManager' ...\n");
 already.installed.packages <- as.character(
     installed.packages(lib.loc = c(.libPaths(),myLibrary))[,"Package"]
     );
-if ( !("BiocManager" %in% already.installed.packages) ) {
+
+if ( "BiocManager" %in% already.installed.packages ) {
+    cat("\n##### 'BiocManager': previously installed ...\n");
+    } else {
+    cat("\n##### installation begins: 'BiocManager' ...\n");
     install.packages(
         pkgs         = c("BiocManager"),
         lib          = myLibrary,
         repos        = myRepoURL,
         dependencies = TRUE # c("Depends", "Imports", "LinkingTo", "Suggests")
         );
+    cat("\n##### installation complete: 'BiocManager' ...\n");
     }
-cat("\n##### installation complete: 'BiocManager' ...\n");
 
 library(
     package        = "BiocManager",
     character.only = TRUE,
-    lib.loc        = myLibrary
+    lib.loc        = c(.libPaths(),myLibrary)
     );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
