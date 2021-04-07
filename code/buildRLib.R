@@ -100,27 +100,19 @@ is.macOS <- grepl(x = sessionInfo()[['platform']], pattern = 'apple', ignore.cas
 myType   <- ifelse(test = is.macOS, yes = "binary", no = getOption("pkgType"));
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-already.installed.packages <- as.character(
-    installed.packages(lib.loc = c(.libPaths(),myLibrary))[,"Package"]
+cat("\n##### installation begins: 'BiocManager' ...\n");
+install.packages(
+    pkgs         = c("BiocManager"),
+    lib          = myLibrary,
+    repos        = myRepoURL,
+    dependencies = TRUE # c("Depends", "Imports", "LinkingTo", "Suggests")
     );
-
-if ( "BiocManager" %in% already.installed.packages ) {
-    cat("\n##### 'BiocManager': previously installed ...\n");
-    } else {
-    cat("\n##### installation begins: 'BiocManager' ...\n");
-    install.packages(
-        pkgs         = c("BiocManager"),
-        lib          = myLibrary,
-        repos        = myRepoURL,
-        dependencies = TRUE # c("Depends", "Imports", "LinkingTo", "Suggests")
-        );
-    cat("\n##### installation complete: 'BiocManager' ...\n");
-    }
+cat("\n##### installation complete: 'BiocManager' ...\n");
 
 library(
     package        = "BiocManager",
     character.only = TRUE,
-    lib.loc        = c(.libPaths(),myLibrary)
+    lib.loc        = myLibrary
     );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
