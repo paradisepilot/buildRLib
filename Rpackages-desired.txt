@@ -22,7 +22,7 @@ futile.logger
 log4r
 
 ##### visualization
-# Cairo
+Cairo
 cowplot
 crosstalk
 scatterD3
@@ -40,6 +40,7 @@ plotly
 revealjs
 rpart.plot
 shiny
+tiff
 
 ##### Bayesian
 abc
