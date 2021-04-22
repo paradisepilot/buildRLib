@@ -59,9 +59,10 @@ preinstalled.packages <- as.character(
 cat("\n# pre-installed packages:\n");
 print(   preinstalled.packages     );
 
-pkgs.desired <- setdiff(pkgs.desired,preinstalled.packages);
+pkgs.desired <- sort(setdiff(pkgs.desired,preinstalled.packages));
+pkgs.desired <- sort(unique(c("rstan",pkgs.desired)));
 cat("\n# packages to be installed:\n");
-print(   pkgs.desired   );
+print( pkgs.desired );
 
 write.table(
     file      = "Rpackages-desired-minus-preinstalled.txt",
@@ -139,12 +140,12 @@ already.installed.packages <- as.character(
     installed.packages(lib.loc = c(.libPaths(),myLibrary))[,"Package"]
     );
 cat("\n# already-installed packages:\n");
-print(   already.installed.packages     );
+print(   already.installed.packages    );
 
 pkgs.still.to.install <- setdiff(pkgs.desired,already.installed.packages);
 pkgs.still.to.install <- sort(unique(c("rstan",pkgs.still.to.install)));
 cat("\n# packages to be installed:\n");
-print(   pkgs.still.to.install   );
+print(   pkgs.still.to.install       );
 
 install.packages(
     pkgs         = pkgs.still.to.install,
