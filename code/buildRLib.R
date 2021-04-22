@@ -142,6 +142,7 @@ cat("\n# already-installed packages:\n");
 print(   already.installed.packages     );
 
 pkgs.still.to.install <- setdiff(pkgs.desired,already.installed.packages);
+pkgs.still.to.install <- sort(unique(c("rstan",pkgs.still.to.install)));
 cat("\n# packages to be installed:\n");
 print(   pkgs.still.to.install   );
 
@@ -158,17 +159,17 @@ cat("\n##### first-round installation complete: not-yet-installed packages in Rp
 already.installed.packages <- as.character(
     installed.packages(lib.loc = c(.libPaths(),myLibrary))[,"Package"]
     );
-pkgs.still.to.install <- setdiff(pkgs.desired,already.installed.packages);
+pkgs.still.to.install <- sort(setdiff(pkgs.desired,already.installed.packages));
 
 if ( length(pkgs.still.to.install) > 0 ) {
 
     cat("\n##### second-round installation begins: not-yet-installed packages in Rpackages-desired.txt ...\n");
 
     cat("\n# already-installed packages:\n");
-    print(   already.installed.packages     );
+    print(   already.installed.packages    );
 
     cat("\n# packages to be installed:\n");
-    print(   pkgs.still.to.install   );
+    print(   pkgs.still.to.install       );
 
     if ( nrow(CRANmirrors) == 1 ) {
         cat("\n# Found no additional CRAN mirrors with 'OK' = 1 and 'Comment' == 'secure_mirror_from_master'\n");
