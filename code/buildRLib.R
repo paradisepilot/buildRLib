@@ -73,21 +73,6 @@ write.table(
     );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-# get URL of an active CRAN mirror
-#CRANmirrors <- getCRANmirrors();
-#CRANmirrors <- CRANmirrors[CRANmirrors[,"OK"]      == 1,                          ];
-#CRANmirrors <- CRANmirrors[CRANmirrors[,'Comment'] == 'secure_mirror_from_master',];
-#
-#if ( nrow(CRANmirrors) > 0 ) {
-#	myRepoURL <- CRANmirrors[1,"URL"];
-#	} else {
-#  cat("\n##### ERROR: Found no CRAN mirrors with 'OK' = 1 and 'Comment' == 'secure_mirror_from_master'\n");
-#  cat("\n##### ABORTED.\n");
-#	quit(save = "no");
-#	}
-#
-#cat(paste("\n##### myRepoURL",myRepoURL,sep=" = "));
-
 # get URL of the cloud CRAN mirror
 DF.CRAN.mirrors <- getCRANmirrors();
 myRepoURL <- DF.CRAN.mirrors[grepl(x = DF.CRAN.mirrors[,"Name"], pattern = "0-Cloud"),"URL"];
@@ -150,6 +135,13 @@ pkgs.still.to.install <- setdiff(pkgs.desired,already.installed.packages);
 pkgs.still.to.install <- sort(unique(c("rstan",pkgs.still.to.install)));
 cat("\n# packages to be installed:\n");
 print(   pkgs.still.to.install       );
+
+install.packages(
+    pkgs         = c("KernSmooth","lattice"),
+    lib          = myLibrary,
+    repos        = myRepoURL,
+    dependencies = TRUE # c("Depends", "Imports", "LinkingTo", "Suggests")
+    );
 
 install.packages(
     pkgs         = pkgs.still.to.install,
