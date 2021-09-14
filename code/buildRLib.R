@@ -144,6 +144,18 @@ install.packages(
     dependencies = TRUE # c("Depends", "Imports", "LinkingTo", "Suggests")
     );
 
+library(
+    package        = "KernSmooth",
+    character.only = TRUE,
+    lib.loc        = myLibrary
+    );
+
+library(
+    package        = "lattice",
+    character.only = TRUE,
+    lib.loc        = myLibrary
+    );
+
 install.packages(
     pkgs         = pkgs.still.to.install,
     lib          = myLibrary,
