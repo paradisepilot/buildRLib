@@ -176,12 +176,12 @@ if ( length(pkgs.still.to.install) > 0 ) {
     cat("\n# packages to be installed:\n");
     print(   pkgs.still.to.install       );
 
-    if ( nrow(CRANmirrors) == 1 ) {
+    if ( nrow(DF.CRAN.mirrors) == 1 ) {
         cat("\n# Found no additional CRAN mirrors with 'OK' = 1 and 'Comment' == 'secure_mirror_from_master'\n");
         } else {
 
-        random.row.index <- sample(x = seq(2,nrow(CRANmirrors)), size = 1);
-        myRepoURL <- CRANmirrors[random.row.index,"URL"];
+        random.row.index <- sample(x = seq(2,nrow(DF.CRAN.mirrors)), size = 1);
+        myRepoURL <- DF.CRAN.mirrors[random.row.index,"URL"];
         print(paste("\n# myRepoURL",myRepoURL,sep=" = "));
 
         install.packages(
