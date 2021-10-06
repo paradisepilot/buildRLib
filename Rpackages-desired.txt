@@ -144,4 +144,5 @@ spdep
 spsurvey
 stars
 terra
+terrainr
 
