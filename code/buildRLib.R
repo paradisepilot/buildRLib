@@ -107,6 +107,22 @@ library(
     );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+cat("\n##### installation begins: 'boot' ...\n");
+install.packages(
+    pkgs         = c("boot"),
+    lib          = myLibrary,
+    repos        = myRepoURL,
+    dependencies = TRUE # c("Depends", "Imports", "LinkingTo", "Suggests")
+    );
+cat("\n##### installation complete: 'boot' ...\n");
+
+library(
+    package        = "boot",
+    character.only = TRUE,
+    lib.loc        = myLibrary
+    );
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 cat("\n##### installation begins: 'BiocManager' ...\n");
 install.packages(
     pkgs         = c("BiocManager"),
