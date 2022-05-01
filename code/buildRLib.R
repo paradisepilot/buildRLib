@@ -91,6 +91,22 @@ is.macOS <- grepl(x = sessionInfo()[['platform']], pattern = 'apple', ignore.cas
 myType   <- ifelse(test = is.macOS, yes = "binary", no = getOption("pkgType"));
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+cat("\n##### installation begins: 'codetools' ...\n");
+install.packages(
+    pkgs         = c("codetools"),
+    lib          = myLibrary,
+    repos        = myRepoURL,
+    dependencies = TRUE # c("Depends", "Imports", "LinkingTo", "Suggests")
+    );
+cat("\n##### installation complete: 'codetools' ...\n");
+
+library(
+    package        = "codetools",
+    character.only = TRUE,
+    lib.loc        = myLibrary
+    );
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 cat("\n##### installation begins: 'BiocManager' ...\n");
 install.packages(
     pkgs         = c("BiocManager"),
