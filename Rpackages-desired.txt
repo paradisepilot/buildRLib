@@ -1,5 +1,6 @@
 ##### general
 arrow
+sfarrow
 BiocManager
 digest
 devtools
