@@ -150,6 +150,7 @@ spsurvey
 stars
 terra
 terrainr
+vapour
 
 ##### wavelets
 biwavelet
