@@ -194,6 +194,7 @@ install.packages(
     pkgs         = pkgs.still.to.install,
     lib          = myLibrary,
     repos        = myRepoURL,
+    type         = "binary",
     dependencies = TRUE # c("Depends", "Imports", "LinkingTo", "Suggests")
     );
 
