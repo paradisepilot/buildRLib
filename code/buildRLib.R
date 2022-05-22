@@ -222,6 +222,7 @@ if ( length(pkgs.still.to.install) > 0 ) {
         pkgs         = pkgs.still.to.install,
         lib          = myLibrary,
         repos        = myRepoURL,
+        type         = "binary",
         dependencies = TRUE # c("Depends", "Imports", "LinkingTo", "Suggests")
         );
 
@@ -261,6 +262,7 @@ if ( length(pkgs.still.to.install) > 0 ) {
             pkgs         = pkgs.still.to.install,
             lib          = myLibrary,
             repos        = myRepoURL,
+            type         = "binary",
             dependencies = TRUE # c("Depends", "Imports", "LinkingTo", "Suggests")
             );
 
