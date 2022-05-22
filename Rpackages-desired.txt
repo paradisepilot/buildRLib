@@ -33,6 +33,7 @@ GGally
 ggiraph
 ggplot2
 ggpubr
+ggTimeSeries
 ggvis
 highcharter
 leaflet
@@ -83,8 +84,8 @@ quadprog
 
 ##### DBMS interfaces
 RMySQL
+RPostgreSQL
 # RODBC
-# RPostgreSQL
 # ROracle
 
 ##### official statistics
@@ -97,12 +98,18 @@ survey
 
 ##### functional data analysis
 fda
+fdacluster
+fdadensity
+fdaMixed
+fdaMocca
+fdANOVA
+fdaoutlier
 fdapace
 fdasrvf
+fdatest
 fda.usc
 FDboost
 fds
-ftsa
 rainbow
 refund
 
@@ -118,7 +125,6 @@ cancensus
 cshapes
 fieldRS
 fMultivar
-gdalcubes
 gdalUtils
 gdistance
 geosphere
@@ -131,13 +137,12 @@ OpenStreetMap
 qualmap
 rcosmo
 rgdal
-raster
-rasterVis
 rgee
 RgoogleMaps
 sf
 sp
 spacetime
+spatialEco
 SpatialEpi
 spatstat
 spdep
@@ -145,4 +150,155 @@ spsurvey
 stars
 terra
 terrainr
+
+##### wavelets
+biwavelet
+BootWPTOS
+calcWOI
+dualtrees
+EFDR
+iWISA
+LS2W
+LSWPlib
+mvLSW
+rwavelet
+rwt
+SynchWave
+unbalhaar
+vectorwavelet
+W2CWM2C
+WASP
+waveband
+WaveletANN
+WaveletArima
+WaveletComp
+WaveletGARCH
+WaveletRF
+wavelets
+WaveletSVR
+wavemulcor
+waveslim
+wavethresh
+wavScalogram
+wsyn
+wv
+
+##### raster
+raster
+rasterVis
+rts
+rtsVis
+sta
+
+##### remote sensing
+ASIP
+dtwSat
+ecochange
+fieldRS
+foster
+gapfill
+gdalcubes
+geoTS
+landsat
+landsat8
+link2GI
+LSRS
+nightmares
+npphen
+phenofit
+PlanetNICFI
+RFmerge
+RGISTools
+RSAlgaeR
+rsat
+RSIP
+RStoolbox
+satellite
+satin
+sits
+spotoroo
+waterquality
+
+##### image processing/analysis
+glcm
+RTextureMetrics
+
+
+##### time series
+arfima
+astsa
+ATAforecasting
+autostsm
+autoTS
+bayesforecast
+BCT
+bdots
+beyondWhittle
+bigtime
+BigVAR
+BNPTSclust
+bsts
+caretForecast
+cleanTS
+CliftLRD
+CNLTtsa
+composits
+EnvCpt
+feasts
+forecast
+forecastML
+funtimes
+garma
+gratis
+HDTSA
+ICvectorfields
+iForecast
+imputeTS
+itsadug
+lite
+LongMemoryTS
+LPWC
+LSTS
+mbsts
+meboot
+mFilter
+mlmts
+modeltime
+modeltime.ensemble
+modeltime.h2o
+# modeltime.gluonts
+modeltime.resample
+mvtsplot
+ncdfgeom
+ngboostForecast
+nonlinearTseries
+perARMA
+permutes
+portes
+Rbeast
+readabs
+runstats
+simts
+tensorTS
+theft
+timetk
+TSA
+TSANN
+tsfeatures
+tsrobprep
+TSS.RESTREND
+TSsmoothing
+TSSS
+TSstudio
+tsutils
+xts
+zoo
+
+##### functional time series
+fdaACF
+fpcb
+freqdom.fda
+ftsa
+ftsspec
+STFTS
 
