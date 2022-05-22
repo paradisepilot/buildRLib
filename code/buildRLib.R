@@ -75,6 +75,7 @@ write.table(
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 # get URL of the cloud CRAN mirror
 # DF.CRAN.mirrors <- getCRANmirrors();
+DF.CRAN.mirrors <- getCRANmirrors(local.only = TRUE);
 # myRepoURL <- DF.CRAN.mirrors[grepl(x = DF.CRAN.mirrors[,"Name"], pattern = "0-Cloud"),"URL"];
 myRepoURL <- "https://cloud.r-project.org";
 print(paste("\n# myRepoURL",myRepoURL,sep=" = "));
@@ -214,11 +215,45 @@ if ( length(pkgs.still.to.install) > 0 ) {
     cat("\n# packages to be installed:\n");
     print(   pkgs.still.to.install       );
 
-    if ( nrow(DF.CRAN.mirrors) == 1 ) {
-        cat("\n# Found no additional CRAN mirrors with 'OK' = 1 and 'Comment' == 'secure_mirror_from_master'\n");
-        } else {
+    myRepoURL <- "https://cran.microsoft.com";
+    print(paste("\n# myRepoURL",myRepoURL,sep=" = "));
 
-        random.row.index <- sample(x = seq(2,nrow(DF.CRAN.mirrors)), size = 1);
+    install.packages(
+        pkgs         = pkgs.still.to.install,
+        lib          = myLibrary,
+        repos        = myRepoURL,
+        dependencies = TRUE # c("Depends", "Imports", "LinkingTo", "Suggests")
+        );
+
+    cat("\n##### second-round installation complete: not-yet-installed packages in Rpackages-desired.txt ...\n");
+
+    }
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+already.installed.packages <- as.character(
+    installed.packages(lib.loc = c(.libPaths(),myLibrary))[,"Package"]
+    );
+pkgs.still.to.install <- sort(setdiff(pkgs.desired,already.installed.packages));
+
+if ( length(pkgs.still.to.install) > 0 ) {
+
+    cat("\n##### third-round installation begins: not-yet-installed packages in Rpackages-desired.txt ...\n");
+
+    cat("\n# already-installed packages:\n");
+    print(   already.installed.packages    );
+
+    cat("\n# packages to be installed:\n");
+    print(   pkgs.still.to.install       );
+
+    is.cloud.or.microsoft <- grep(x = DF.CRAN.mirrors[,'URL'], pattern = "(cloud|microsoft)")
+    DF.CRAN.mirrors <- DF.CRAN.mirrors[setdiff(1:nrow(DF.CRAN.mirrors),is.cloud.or.microsoft),];
+    DF.CRAN.mirrors <- DF.CRAN.mirrors[DF.CRAN.mirrors[,'OK'] == 1,];
+
+    if ( nrow(DF.CRAN.mirrors) == 1 ) {
+        cat("\n# Found no additional CRAN mirrors; do nothing.'\n");
+        } else {
+    
+        random.row.index <- sample(x = seq(1,nrow(DF.CRAN.mirrors)), size = 1);
         myRepoURL <- DF.CRAN.mirrors[random.row.index,"URL"];
         print(paste("\n# myRepoURL",myRepoURL,sep=" = "));
 
@@ -231,7 +266,7 @@ if ( length(pkgs.still.to.install) > 0 ) {
 
         }
 
-    cat("\n##### second-round installation complete: not-yet-installed packages in Rpackages-desired.txt ...\n");
+    cat("\n##### third-round installation complete: not-yet-installed packages in Rpackages-desired.txt ...\n");
 
     }
 
