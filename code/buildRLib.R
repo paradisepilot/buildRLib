@@ -74,8 +74,9 @@ write.table(
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 # get URL of the cloud CRAN mirror
-DF.CRAN.mirrors <- getCRANmirrors();
-myRepoURL <- DF.CRAN.mirrors[grepl(x = DF.CRAN.mirrors[,"Name"], pattern = "0-Cloud"),"URL"];
+# DF.CRAN.mirrors <- getCRANmirrors();
+# myRepoURL <- DF.CRAN.mirrors[grepl(x = DF.CRAN.mirrors[,"Name"], pattern = "0-Cloud"),"URL"];
+myRepoURL <- "https://cloud.r-project.org";
 print(paste("\n# myRepoURL",myRepoURL,sep=" = "));
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
