@@ -194,6 +194,7 @@ sta
 
 ##### remote sensing
 ASIP
+deforestable
 dtwSat
 ecochange
 fieldRS
@@ -222,9 +223,20 @@ spotoroo
 waterquality
 
 ##### image processing/analysis
+# Bayesian image analysis, Hidden Markov random field
+bayesImageS
+catsim
 glcm
+imager
+imagerExtra
+imagefx
+# imageseg # requires GPU, labelled training data
+image.dlib
+image.Otsu
+imagine
+KoulMde
+OpenImageR
 RTextureMetrics
-
 
 ##### time series
 arfima
