@@ -126,6 +126,7 @@ cancensus
 cshapes
 fieldRS
 fMultivar
+gdalUtilities
 gdalUtils
 gdistance
 geosphere
