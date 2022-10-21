@@ -170,7 +170,7 @@ if ( is.linux ) {
         );
 
     myRepoURL <- "https://packagemanager.rstudio.com/all/__linux__/focal/latest";
-    print(paste("\n# myRepoURL (Linux)",myRepoURL,sep=" = "));
+    cat(paste("\n# myRepoURL (Linux)",myRepoURL,sep=" = "));
 
     }
 
