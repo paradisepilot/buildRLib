@@ -155,6 +155,26 @@ if ( length(BiocPkgs) > 0 ) {
     }
 cat("\n##### installation complete: 'Bioconductor' packages ...\n");
 
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+is.linux <- grepl(x = sessionInfo()[['platform']], pattern = 'linux', ignore.case = TRUE);
+if ( is.linux ) {
+    cat("\n##### installation (on Linux) begins: 'arrow' ...\n");
+    options(
+        HTTPUserAgent = sprintf(
+            "R/%s R (%s)",
+            getRversion(),
+            paste(getRversion(), R.version["platform"], R.version["arch"], R.version["os"])
+            )
+        );
+    install.packages(
+        pkgs  = "arrow",
+        lib   = myLibrary,
+        repos = "https://packagemanager.rstudio.com/all/__linux__/focal/latest"
+        );
+    cat("\n##### installation complete: 'arrow'  ...\n");
+    }
+
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 cat("\n##### first-round installation begins: not-yet-installed packages in Rpackages-desired.txt ...\n");
 
