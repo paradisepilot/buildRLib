@@ -155,18 +155,9 @@ if ( length(BiocPkgs) > 0 ) {
     }
 cat("\n##### installation complete: 'Bioconductor' packages ...\n");
 
-
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 is.linux <- grepl(x = sessionInfo()[['platform']], pattern = 'linux', ignore.case = TRUE);
 if ( is.linux ) {
-
-    cat("\n##### installation (on Linux) begins: 'arrow', 'terrainr' ...\n");
-
-    install.packages(
-        pkgs  = "terrainr",
-        lib   = myLibrary,
-        repos = "https://cloud.r-project.org"
-        );
 
     ### See instructions for installing arrow on Linux here:
     ### https://cran.r-project.org/web/packages/arrow/vignettes/install.html
@@ -177,13 +168,9 @@ if ( is.linux ) {
             paste(getRversion(), R.version["platform"], R.version["arch"], R.version["os"])
             )
         );
-    install.packages(
-        pkgs  = "arrow",
-        lib   = myLibrary,
-        repos = "https://packagemanager.rstudio.com/all/__linux__/focal/latest"
-        );
 
-    cat("\n##### installation (on Linux) complete: 'arrow', 'terrainr' ...\n");
+    myRepoURL <- "https://packagemanager.rstudio.com/all/__linux__/focal/latest";
+    print(paste("\n# myRepoURL (Linux)",myRepoURL,sep=" = "));
 
     }
 
@@ -327,6 +314,46 @@ if ( is.macOS ) {
         }
 
     }
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+# is.linux <- grepl(x = sessionInfo()[['platform']], pattern = 'linux', ignore.case = TRUE);
+# if ( is.linux ) {
+#
+#     cat("\n##### special installation on Linux begins ...\n");
+#
+#     pkgs.special.install   <- c("arrow","fdacluster","fdANOVA","RGISTools","sta","terrainr","tsutils");
+#     DF.installed.pkgs      <- installed.packages();
+#     pkgs.already.installed <- as.character(DF.installed.pkgs[,"Package"]);
+#     pkgs.to.install        <- setdiff(pkgs.special.install,pkgs.already.installed);
+#
+#     if ( length(pkgs.to.install) == 0 ) {
+#
+#         cat("\n##### all special-install packages have already been installed ...\n");
+#
+#     } else {
+#
+#         cat("\n### installation (on Linux) begins: 'arrow', 'terrainr' ...\n");
+#         ### See instructions for installing arrow on Linux here:
+#         ### https://cran.r-project.org/web/packages/arrow/vignettes/install.html
+#         options(
+#             HTTPUserAgent = sprintf(
+#                 "R/%s R (%s)",
+#                 getRversion(),
+#                 paste(getRversion(), R.version["platform"], R.version["arch"], R.version["os"])
+#                 )
+#             );
+#         install.packages(
+#             pkgs  = pkgs.to.install,
+#             lib   = myLibrary,
+#             repos = "https://packagemanager.rstudio.com/all/__linux__/focal/latest"
+#             );
+#         cat("\n### installation (on Linux) begins: 'arrow', 'terrainr' ...\n");
+#
+#         }
+#
+#     cat("\n##### special installation on Linux complete ...\n");
+#
+#     }
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 my.colnames <- c("Package","Version","License","License_restricts_use","NeedsCompilation","Built");
