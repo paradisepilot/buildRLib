@@ -159,6 +159,7 @@ cat("\n##### installation complete: 'Bioconductor' packages ...\n");
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 is.linux <- grepl(x = sessionInfo()[['platform']], pattern = 'linux', ignore.case = TRUE);
 if ( is.linux ) {
+    ### See instructions in: https://cran.r-project.org/web/packages/arrow/vignettes/install.html
     cat("\n##### installation (on Linux) begins: 'arrow' ...\n");
     options(
         HTTPUserAgent = sprintf(
