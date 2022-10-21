@@ -292,30 +292,6 @@ if ( length(pkgs.still.to.install) > 0 ) {
     }
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-# On macOS, install also: spDataLarge, getSpatialData
-is.macOS <- grepl(x = sessionInfo()[['platform']], pattern = 'apple', ignore.case = TRUE);
-if ( is.macOS ) {
-
-    cat("\n##### installation begins: 'spDataLarge' ...\n");
-    install.packages(
-        pkgs  = 'spDataLarge',
-        lib   = myLibrary,
-        repos = 'https://nowosad.github.io/drat/',
-        type  = 'source'
-        );
-    cat("\n##### installation complete: 'spDataLarge' ...\n");
-
-    .libPaths(c(myLibrary,.libPaths()));
-    github.repos <- c("r-spatial/RQGIS3","16EAGLE/getSpatialData");
-    for ( github.repo in github.repos ) {
-        cat(paste0("\n##### installation begins: '",github.repo,"' ...\n"));
-        devtools::install_github(repo = github.repo, upgrade = "always");
-        cat(paste0("\n##### installation complete: '",github.repo,"' ...\n"));
-        }
-
-    }
-
-### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 is.linux <- grepl(x = sessionInfo()[['platform']], pattern = 'linux', ignore.case = TRUE);
 if ( is.linux ) {
 
@@ -352,6 +328,30 @@ if ( is.linux ) {
         }
 
     cat("\n##### special installation on Linux complete ...\n");
+
+    }
+
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
+# On macOS, install also: spDataLarge, getSpatialData
+is.macOS <- grepl(x = sessionInfo()[['platform']], pattern = 'apple', ignore.case = TRUE);
+if ( is.macOS ) {
+
+    cat("\n##### installation begins: 'spDataLarge' ...\n");
+    install.packages(
+        pkgs  = 'spDataLarge',
+        lib   = myLibrary,
+        repos = 'https://nowosad.github.io/drat/',
+        type  = 'source'
+        );
+    cat("\n##### installation complete: 'spDataLarge' ...\n");
+
+    .libPaths(c(myLibrary,.libPaths()));
+    github.repos <- c("r-spatial/RQGIS3","16EAGLE/getSpatialData");
+    for ( github.repo in github.repos ) {
+        cat(paste0("\n##### installation begins: '",github.repo,"' ...\n"));
+        devtools::install_github(repo = github.repo, upgrade = "always");
+        cat(paste0("\n##### installation complete: '",github.repo,"' ...\n"));
+        }
 
     }
 
