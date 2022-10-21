@@ -159,13 +159,17 @@ cat("\n##### installation complete: 'Bioconductor' packages ...\n");
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 is.linux <- grepl(x = sessionInfo()[['platform']], pattern = 'linux', ignore.case = TRUE);
 if ( is.linux ) {
-    ### See instructions in: https://cran.r-project.org/web/packages/arrow/vignettes/install.html
+
     cat("\n##### installation (on Linux) begins: 'arrow', 'terrainr' ...\n");
+
     install.packages(
         pkgs  = "terrainr",
         lib   = myLibrary,
         repos = "https://cloud.r-project.org"
         );
+
+    ### See instructions for installing arrow on Linux here:
+    ### https://cran.r-project.org/web/packages/arrow/vignettes/install.html
     options(
         HTTPUserAgent = sprintf(
             "R/%s R (%s)",
@@ -178,7 +182,9 @@ if ( is.linux ) {
         lib   = myLibrary,
         repos = "https://packagemanager.rstudio.com/all/__linux__/focal/latest"
         );
+
     cat("\n##### installation complete: 'arrow', 'terrainr' ...\n");
+
     }
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
