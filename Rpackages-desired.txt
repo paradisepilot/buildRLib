@@ -258,6 +258,7 @@ cleanTS
 CliftLRD
 CNLTtsa
 composits
+deming
 EnvCpt
 feasts
 forecast
