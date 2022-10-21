@@ -88,8 +88,8 @@ cat("\n# getOption('timeout')\n");
 print(   getOption('timeout')   );
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
-is.macOS <- grepl(x = sessionInfo()[['platform']], pattern = 'apple', ignore.case = TRUE);
-myType   <- ifelse(test = is.macOS, yes = "binary", no = getOption("pkgType"));
+is.macOS     <- grepl(x = sessionInfo()[['platform']], pattern = 'apple', ignore.case = TRUE);
+install.type <- ifelse(test = is.macOS, yes = "binary", no = getOption("pkgType"));
 
 ### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ###
 cat("\n##### installation begins: 'codetools' ...\n");
@@ -193,7 +193,7 @@ install.packages(
     pkgs         = pkgs.still.to.install,
     lib          = myLibrary,
     repos        = myRepoURL,
-    type         = "binary",
+    type         = install.type,
     dependencies = TRUE # c("Depends", "Imports", "LinkingTo", "Suggests")
     );
 
@@ -222,7 +222,7 @@ if ( length(pkgs.still.to.install) > 0 ) {
         pkgs         = pkgs.still.to.install,
         lib          = myLibrary,
         repos        = myRepoURL,
-        type         = "binary",
+        type         = install.type,
         dependencies = TRUE # c("Depends", "Imports", "LinkingTo", "Suggests")
         );
 
@@ -253,7 +253,7 @@ if ( length(pkgs.still.to.install) > 0 ) {
     if ( nrow(DF.CRAN.mirrors) == 1 ) {
         cat("\n# Found no additional CRAN mirrors; do nothing.'\n");
         } else {
-    
+
         random.row.index <- sample(x = seq(1,nrow(DF.CRAN.mirrors)), size = 1);
         myRepoURL <- DF.CRAN.mirrors[random.row.index,"URL"];
         print(paste("\n# myRepoURL",myRepoURL,sep=" = "));
@@ -262,7 +262,7 @@ if ( length(pkgs.still.to.install) > 0 ) {
             pkgs         = pkgs.still.to.install,
             lib          = myLibrary,
             repos        = myRepoURL,
-            type         = "binary",
+            type         = install.type,
             dependencies = TRUE # c("Depends", "Imports", "LinkingTo", "Suggests")
             );
 
