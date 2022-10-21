@@ -183,7 +183,7 @@ if ( is.linux ) {
         repos = "https://packagemanager.rstudio.com/all/__linux__/focal/latest"
         );
 
-    cat("\n##### installation complete: 'arrow', 'terrainr' ...\n");
+    cat("\n##### installation (on Linux) complete: 'arrow', 'terrainr' ...\n");
 
     }
 
