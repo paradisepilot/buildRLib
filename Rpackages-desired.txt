@@ -271,6 +271,7 @@ iForecast
 imputeTS
 itsadug
 lite
+litteR
 LongMemoryTS
 LPWC
 LSTS
@@ -316,4 +317,3 @@ freqdom.fda
 ftsa
 ftsspec
 STFTS
-
