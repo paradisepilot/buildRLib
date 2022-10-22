@@ -132,7 +132,6 @@ gdistance
 geosphere
 ggmap
 ggspatial
-GISTools
 gstat
 GWmodel
 OpenStreetMap
