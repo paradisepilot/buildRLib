@@ -17,6 +17,10 @@ R6
 Rd2roxygen
 systemfonts
 
+##### cloud
+googleCloudStorageR
+googleComputeEngineR
+
 ##### logging
 logger
 logging
