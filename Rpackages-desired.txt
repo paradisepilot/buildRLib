@@ -121,6 +121,8 @@ refund
 
 ##### misc.
 EnvStats
+openair
+multiplex
 
 ##### Markov random field
 mrf2d
@@ -129,6 +131,7 @@ RandomFields
 ##### spatial
 cancensus
 cshapes
+dggridR
 fieldRS
 fMultivar
 gdalUtilities
