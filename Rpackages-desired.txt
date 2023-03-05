@@ -143,6 +143,7 @@ ggspatial
 gstat
 GWmodel
 OpenStreetMap
+proj4
 qualmap
 rcosmo
 rgdal
